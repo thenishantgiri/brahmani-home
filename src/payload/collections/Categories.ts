@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload/types'
+import type { CollectionConfig } from 'payload/types';
 
 const Categories: CollectionConfig = {
   slug: 'categories',
@@ -20,6 +20,6 @@ const Categories: CollectionConfig = {
       relationTo: 'media',
     },
   ],
-}
+};
 
-export default Categories
+export default Categories;

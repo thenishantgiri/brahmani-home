@@ -1,19 +1,19 @@
-import React from 'react'
-import Link from 'next/link'
+import React from 'react';
+import Link from 'next/link';
 
-import { Media } from '../../../_components/Media'
-import { Price } from '../../../_components/Price'
-import { formatDateTime } from '../../../_utilities/formatDateTime'
-import { getMeUser } from '../../../_utilities/getMeUser'
+import { Media } from '../../../_components/Media';
+import { Price } from '../../../_components/Price';
+import { formatDateTime } from '../../../_utilities/formatDateTime';
+import { getMeUser } from '../../../_utilities/getMeUser';
 
-import classes from './index.module.scss'
+import classes from './index.module.scss';
 
 export default async function Purchases() {
   const { user } = await getMeUser({
     nullUserRedirect: `/login?error=${encodeURIComponent(
       'You must be logged in to access your account.',
     )}&redirect=${encodeURIComponent('/account')}`,
-  })
+  });
 
   return (
     <div>
@@ -46,7 +46,7 @@ export default async function Purchases() {
                     </Link>
                   )}
                 </li>
-              )
+              );
             })}
           </ul>
         ) : (
@@ -54,5 +54,5 @@ export default async function Purchases() {
         )}
       </div>
     </div>
-  )
+  );
 }

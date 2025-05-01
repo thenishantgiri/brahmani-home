@@ -1,29 +1,29 @@
-'use client'
+'use client';
 
-import React from 'react'
+import React from 'react';
 
-import { Category } from '../../../../payload/payload-types'
-import { Checkbox } from '../../../_components/Checkbox'
-import { HR } from '../../../_components/HR'
-import { RadioButton } from '../../../_components/Radio'
-import { useFilter } from '../../../_providers/Filter'
+import { Category } from '../../../../payload/payload-types';
+import { Checkbox } from '../../../_components/Checkbox';
+import { HR } from '../../../_components/HR';
+import { RadioButton } from '../../../_components/Radio';
+import { useFilter } from '../../../_providers/Filter';
 
-import classes from './index.module.scss'
+import classes from './index.module.scss';
 
 const Filters = ({ categories }: { categories: Category[] }) => {
-  const { categoryFilters, sort, setCategoryFilters, setSort } = useFilter()
+  const { categoryFilters, sort, setCategoryFilters, setSort } = useFilter();
 
   const handleCategories = (categoryId: string) => {
     if (categoryFilters.includes(categoryId)) {
-      const updatedCategories = categoryFilters.filter(id => id !== categoryId)
+      const updatedCategories = categoryFilters.filter(id => id !== categoryId);
 
-      setCategoryFilters(updatedCategories)
+      setCategoryFilters(updatedCategories);
     } else {
-      setCategoryFilters([...categoryFilters, categoryId])
+      setCategoryFilters([...categoryFilters, categoryId]);
     }
-  }
+  };
 
-  const handleSort = (value: string) => setSort(value)
+  const handleSort = (value: string) => setSort(value);
 
   return (
     <div className={classes.filters}>
@@ -31,7 +31,7 @@ const Filters = ({ categories }: { categories: Category[] }) => {
         <h6 className={classes.title}>Product Categories</h6>
         <div className={classes.categories}>
           {categories.map(category => {
-            const isSelected = categoryFilters.includes(category.id)
+            const isSelected = categoryFilters.includes(category.id);
 
             return (
               <Checkbox
@@ -41,7 +41,7 @@ const Filters = ({ categories }: { categories: Category[] }) => {
                 isSelected={isSelected}
                 onClickHandler={handleCategories}
               />
-            )
+            );
           })}
         </div>
         <HR className={classes.hr} />
@@ -64,7 +64,7 @@ const Filters = ({ categories }: { categories: Category[] }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Filters
+export default Filters;

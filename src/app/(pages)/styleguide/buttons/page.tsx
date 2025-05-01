@@ -1,12 +1,11 @@
-import React, { Fragment } from 'react'
-import { Metadata } from 'next'
-import Link from 'next/link'
+import React, { Fragment } from 'react';
+import { Metadata } from 'next';
+import Link from 'next/link';
 
-import { CallToActionBlock } from '../../../_blocks/CallToAction'
-import { Button } from '../../../_components/Button'
-import { Gutter } from '../../../_components/Gutter'
-import { VerticalPadding } from '../../../_components/VerticalPadding'
-import { mergeOpenGraph } from '../../../_utilities/mergeOpenGraph'
+import { Button } from '../../../_components/Button';
+import { Gutter } from '../../../_components/Gutter';
+import { VerticalPadding } from '../../../_components/VerticalPadding';
+import { mergeOpenGraph } from '../../../_utilities/mergeOpenGraph';
 
 export default async function ButtonsPage() {
   return (
@@ -29,7 +28,7 @@ export default async function ButtonsPage() {
         </VerticalPadding>
       </Gutter>
     </Fragment>
-  )
+  );
 }
 
 export const metadata: Metadata = {
@@ -39,4 +38,4 @@ export const metadata: Metadata = {
     title: 'Buttons',
     url: '/styleguide/buttons',
   }),
-}
+};

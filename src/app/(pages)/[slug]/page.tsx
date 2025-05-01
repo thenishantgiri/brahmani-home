@@ -1,16 +1,16 @@
-import React from 'react'
-import { Metadata } from 'next'
-import { draftMode } from 'next/headers'
-import { notFound } from 'next/navigation'
+import React from 'react';
+import { Metadata } from 'next';
+import { draftMode } from 'next/headers';
+import { notFound } from 'next/navigation';
 
-import { Category, Page } from '../../../payload/payload-types'
-import { staticHome } from '../../../payload/seed/home-static'
-import { fetchDoc } from '../../_api/fetchDoc'
-import { fetchDocs } from '../../_api/fetchDocs'
-import { Blocks } from '../../_components/Blocks'
-import { Gutter } from '../../_components/Gutter'
-import { Hero } from '../../_components/Hero'
-import { generateMeta } from '../../_utilities/generateMeta'
+import type { Category, Page } from '../../../payload/payload-types';
+import { staticHome } from '../../../payload/seed/home-static';
+import { fetchDoc } from '../../_api/fetchDoc';
+import { fetchDocs } from '../../_api/fetchDocs';
+import { Blocks } from '../../_components/Blocks';
+import { Gutter } from '../../_components/Gutter';
+import { Hero } from '../../_components/Hero';
+import { generateMeta } from '../../_utilities/generateMeta';
 
 // Payload Cloud caches all files through Cloudflare, so we don't need Next.js to cache them as well
 // This means that we can turn off Next.js data caching and instead rely solely on the Cloudflare CDN
@@ -18,27 +18,27 @@ import { generateMeta } from '../../_utilities/generateMeta'
 // But we also need to force Next.js to dynamically render this page on each request for preview mode to work
 // See https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic
 // If you are not using Payload Cloud then this line can be removed, see `../../../README.md#cache`
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
-import Categories from '../../_components/Categories'
-import Promotion from '../../_components/Promotion'
+import Categories from '../../_components/Categories';
+import Promotion from '../../_components/Promotion';
 
-import classes from './index.module.scss'
+import classes from './index.module.scss';
 
 export default async function Page({ params: { slug = 'home' } }) {
-  const { isEnabled: isDraftMode } = draftMode()
+  const { isEnabled: isDraftMode } = draftMode();
 
-  let page: Page | null = null
-  let categories: Category[] | null = null
+  let page: Page | null = null;
+  let categories: Category[] | null = null;
 
   try {
     page = await fetchDoc<Page>({
       collection: 'pages',
       slug,
       draft: isDraftMode,
-    })
+    });
 
-    categories = await fetchDocs<Category>('categories')
+    categories = await fetchDocs<Category>('categories');
   } catch (error) {
     // when deploying this template on Payload Cloud, this page needs to build before the APIs are live
     // so swallow the error here and simply render the page with fallback data where necessary
@@ -50,14 +50,14 @@ export default async function Page({ params: { slug = 'home' } }) {
   // you should delete this code once you have a home page in the CMS
   // this is really only useful for those who are demoing this template
   if (!page && slug === 'home') {
-    page = staticHome
+    page = staticHome;
   }
 
   if (!page) {
-    return notFound()
+    return notFound();
   }
 
-  const { hero, layout } = page
+  const { hero, layout } = page;
 
   return (
     <React.Fragment>
@@ -80,29 +80,29 @@ export default async function Page({ params: { slug = 'home' } }) {
         </>
       )}
     </React.Fragment>
-  )
+  );
 }
 
 export async function generateStaticParams() {
   try {
-    const pages = await fetchDocs<Page>('pages')
-    return pages?.map(({ slug }) => slug)
+    const pages = await fetchDocs<Page>('pages');
+    return pages?.map(({ slug }) => slug);
   } catch (error) {
-    return []
+    return [];
   }
 }
 
 export async function generateMetadata({ params: { slug = 'home' } }): Promise<Metadata> {
-  const { isEnabled: isDraftMode } = draftMode()
+  const { isEnabled: isDraftMode } = draftMode();
 
-  let page: Page | null = null
+  let page: Page | null = null;
 
   try {
     page = await fetchDoc<Page>({
       collection: 'pages',
       slug,
       draft: isDraftMode,
-    })
+    });
   } catch (error) {
     // don't throw an error if the fetch fails
     // this is so that we can render a static home page for the demo
@@ -111,8 +111,8 @@ export async function generateMetadata({ params: { slug = 'home' } }): Promise<M
   }
 
   if (!page && slug === 'home') {
-    page = staticHome
+    page = staticHome;
   }
 
-  return generateMeta({ doc: page })
+  return generateMeta({ doc: page });
 }
